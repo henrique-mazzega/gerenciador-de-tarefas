@@ -37,6 +37,13 @@ public class ProjetoService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public Projeto buscarProjetoComAcesso(Long projetoId, Usuario usuario) {
+        Projeto projeto = buscarOuLancarErro(projetoId);
+        validarAcesso(projeto, usuario);
+        return projeto;
+    }
+
     @Transactional
     public ProjetoResponse criar(ProjetoRequest request, Usuario autenticado) {
         Projeto projeto = new Projeto();
