@@ -42,12 +42,12 @@ public class TarefaSpecification {
     }
 
     public static Specification<Tarefa> comFiltros(Long projetoId,
-                                                     StatusTarefa status,
-                                                     PrioridadeTarefa prioridade,
-                                                     Long responsavelId,
-                                                     LocalDateTime prazoInicio,
-                                                     LocalDateTime prazoFim) {
-        return Specification.where(comProjetoId(projetoId))
+                                                   StatusTarefa status,
+                                                   PrioridadeTarefa prioridade,
+                                                   Long responsavelId,
+                                                   LocalDateTime prazoInicio,
+                                                   LocalDateTime prazoFim) {
+        return comProjetoId(projetoId)
                 .and(comStatus(status))
                 .and(comPrioridade(prioridade))
                 .and(comResponsavelId(responsavelId))
