@@ -93,7 +93,14 @@ public class ProjetoService {
         Projeto projeto = buscarOuLancarErro(projetoId);
         validarEhDono(projeto, autenticado);
 
-        Usuario novoMembro = usuarioService.buscarPorId(request.usuarioId());
+        Usuario novoMembro = usuarioService.buscarPorEmail(request.email());
+
+        boolean jaEhMembro = projeto.getMembros().stream()
+                .anyMatch(m -> m.getId().equals(novoMembro.getId()));
+        if (jaEhMembro) {
+            throw new RegraDeNegocioException("Usuário já é membro deste projeto");
+        }
+
         projeto.getMembros().add(novoMembro);
 
         return toResponse(projetoRepository.save(projeto));

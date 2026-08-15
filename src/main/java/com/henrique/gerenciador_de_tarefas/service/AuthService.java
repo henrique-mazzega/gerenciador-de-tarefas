@@ -32,13 +32,13 @@ public class AuthService {
         usuario.setSenha(passwordEncoder.encode(request.senha()));
 
         Usuario salvo = usuarioRepository.save(usuario);
-        return new TokenResponse(jwtService.gerarToken(salvo), "Bearer");
+        return new TokenResponse(jwtService.gerarToken(salvo), salvo.getNome(), salvo.getEmail());
     }
 
     public TokenResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.senha()));
 
         Usuario usuario = usuarioRepository.findByEmail(request.email()).orElseThrow();
-        return new TokenResponse(jwtService.gerarToken(usuario), "Bearer");
+        return new TokenResponse(jwtService.gerarToken(usuario), usuario.getNome(), usuario.getEmail());
     }
 }

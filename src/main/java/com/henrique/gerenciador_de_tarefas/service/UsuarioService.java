@@ -16,7 +16,7 @@ public class UsuarioService {
     @Transactional(readOnly = true)
     public Usuario buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário com e-mail '" + email + "' não encontrado"));
     }
 
     @Transactional(readOnly = true)

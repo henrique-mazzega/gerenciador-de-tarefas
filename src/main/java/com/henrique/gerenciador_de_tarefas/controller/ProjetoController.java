@@ -89,12 +89,13 @@ public class ProjetoController {
     }
 
     @PostMapping("/{id}/membros")
-    @Operation(summary = "Adiciona um usuário como membro do projeto (apenas o dono)")
+    @Operation(summary = "Adiciona como membro do projeto o usuário dono do e-mail informado (apenas o dono do projeto)")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Membro adicionado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos"),
             @ApiResponse(responseCode = "403", description = "Apenas o dono do projeto pode adicionar membros"),
-            @ApiResponse(responseCode = "404", description = "Projeto ou usuário não encontrado")
+            @ApiResponse(responseCode = "404", description = "Projeto não encontrado, ou nenhum usuário cadastrado com esse e-mail"),
+            @ApiResponse(responseCode = "409", description = "Usuário já é membro deste projeto")
     })
     public ResponseEntity<ProjetoResponse> adicionarMembro(@PathVariable Long id,
                                                             @Valid @RequestBody AdicionarMembroRequest request,
