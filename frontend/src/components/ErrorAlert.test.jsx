@@ -8,14 +8,14 @@ describe('ErrorAlert', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('exibe title e detail para um erro que não é de validação', () => {
+  it('exibe apenas o detail para um erro que não é de validação, sem o title', () => {
     render(
       <ErrorAlert
         erro={{ status: 409, title: 'Regra de negócio violada', detail: 'Limite atingido' }}
       />,
     );
 
-    expect(screen.getByText('Regra de negócio violada')).toBeInTheDocument();
+    expect(screen.queryByText('Regra de negócio violada')).not.toBeInTheDocument();
     expect(screen.getByText('Limite atingido')).toBeInTheDocument();
   });
 
@@ -67,11 +67,13 @@ describe('ErrorAlert', () => {
         erro={{
           status: 409,
           title: 'Regra de negócio violada',
-          detail: 'Tarefa concluída (DONE) não pode retornar para TODO',
+          detail: 'Uma tarefa concluída não pode voltar direto para TODO. Mova primeiro para IN_PROGRESS.',
         }}
       />,
     );
 
-    expect(screen.getByText('Tarefa concluída (Concluído) não pode retornar para A Fazer')).toBeInTheDocument();
+    expect(
+      screen.getByText('Uma tarefa concluída não pode voltar direto para A Fazer. Mova primeiro para Em Andamento.'),
+    ).toBeInTheDocument();
   });
 });

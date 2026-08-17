@@ -4,10 +4,10 @@ import { traduzirMensagem } from './traduzirMensagem';
 describe('traduzirMensagem', () => {
   it('substitui múltiplas ocorrências de status e prioridade pelos rótulos em português', () => {
     const original =
-      'Tarefa concluída (DONE) não pode retornar para TODO. A transição permitida é DONE → IN_PROGRESS';
+      'Uma tarefa concluída não pode voltar direto para TODO. Mova primeiro para IN_PROGRESS.';
 
     expect(traduzirMensagem(original)).toBe(
-      'Tarefa concluída (Concluído) não pode retornar para A Fazer. A transição permitida é Concluído → Em Andamento',
+      'Uma tarefa concluída não pode voltar direto para A Fazer. Mova primeiro para Em Andamento.',
     );
   });
 

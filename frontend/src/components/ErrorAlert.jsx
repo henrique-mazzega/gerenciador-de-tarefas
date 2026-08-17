@@ -10,7 +10,6 @@ export default function ErrorAlert({ erro, onFechar }) {
   return (
     <div className="alerta-erro" role="alert">
       <div>
-        <strong>{erro.title || 'Erro'}</strong>
         <p>{traduzirMensagem(erro.detail) || 'Ocorreu um erro inesperado. Tente novamente.'}</p>
         {camposInvalidos && camposInvalidos.length > 0 && (
           <ul className="alerta-erro-campos">

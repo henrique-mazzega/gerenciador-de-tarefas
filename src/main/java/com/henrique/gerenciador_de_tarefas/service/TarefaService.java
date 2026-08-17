@@ -167,8 +167,8 @@ public class TarefaService {
     private void validarTransicaoDeStatus(StatusTarefa atual, StatusTarefa novo) {
         if (atual == StatusTarefa.DONE && novo == StatusTarefa.TODO) {
             throw new RegraDeNegocioException(
-                    "Tarefa concluída (DONE) não pode retornar para TODO. " +
-                    "A transição permitida é DONE → IN_PROGRESS");
+                    "Uma tarefa concluída não pode voltar direto para TODO. " +
+                    "Mova primeiro para IN_PROGRESS.");
         }
     }
 
